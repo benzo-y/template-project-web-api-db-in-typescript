@@ -9,3 +9,10 @@
 - db
   - conf
   - logs
+
+## apiサーバの構築
+
+```bash
+docker-compose run --rm --no-deps api /bin/bash
+npm install
+```

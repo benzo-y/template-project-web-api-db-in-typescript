@@ -16,5 +16,15 @@ services:
       - mysql_data:/var/lib/mysql
       - ./db/logs:/var/log/mysql
 
+  api:
+    image: node
+    tty: true
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./api:/app
+    working_dir: /app
+    command: npm run dev
+
 volumes:
   mysql_data:
