@@ -15,9 +15,19 @@ services:
       - ./db/conf:/etc/mysql/conf.d/:ro
       - mysql_data:/var/lib/mysql
       - ./db/logs:/var/log/mysql
+    networks:
+      backend:
+        ipv4_address: 172.28.1.5
 
   api:
     image: node
+    environment:
+      - MYSQL_SERVER=172.28.1.5
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+      - MYSQL_DATABASE=${DB_NAME}
+      - TZ=${TZ}
+      - CHOKIDAR_USEPOLLING=true
     tty: true
     ports:
       - '3000:3000'
@@ -25,6 +35,22 @@ services:
       - ./api:/app
     working_dir: /app
     command: npm run dev
+    networks:
+      backend:
+        ipv4_address: 172.28.1.10
+    depends_on:
+      - db
+
+  # app:
+  #   image: node
+
+networks:
+  backend:
+    driver: bridge
+    name: app_network
+    ipam:
+      config:
+        - subnet: 172.28.1.0/24
 
 volumes:
   mysql_data:
