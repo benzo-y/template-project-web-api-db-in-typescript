@@ -1,11 +1,10 @@
 import React from 'react';
+import Users from './Users';
 
 function App() {
   return (
     <div>
-        <p>
-          Hello React.
-        </p>
+        <Users />
         <a
           className="App-link"
           href="https://reactjs.org"
