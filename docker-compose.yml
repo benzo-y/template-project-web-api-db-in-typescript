@@ -20,7 +20,7 @@ services:
         ipv4_address: 172.28.1.5
 
   api:
-    image: node
+    image: node:18
     environment:
       - MYSQL_SERVER=172.28.1.5
       - MYSQL_USER=${DB_USER}
@@ -41,8 +41,21 @@ services:
     depends_on:
       - db
 
-  # app:
-  #   image: node
+  web:
+    image: node:18
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    tty: true
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./web:/app
+    working_dir: /app
+    command: bash -c 'npm start && npm run build'
+    networks:
+      - backend
+    depends_on:
+      - api
 
 networks:
   backend:
