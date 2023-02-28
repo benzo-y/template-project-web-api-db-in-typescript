@@ -16,3 +16,10 @@
 docker-compose run --rm --no-deps api /bin/bash
 npm install
 ```
+
+## webサーバの構築
+
+```bash
+docker-compose run --rm --no-deps web /bin/bash
+npm install
+```
