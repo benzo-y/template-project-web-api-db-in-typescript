@@ -44,6 +44,8 @@ services:
   web:
     image: node:18
     environment:
+      - REACT_APP_API_SERVER=172.28.1.10
+      - REACT_APP_API_PORT=3000
       - CHOKIDAR_USEPOLLING=true
     tty: true
     ports:

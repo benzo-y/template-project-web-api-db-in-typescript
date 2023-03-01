@@ -1,12 +1,13 @@
 import React, { useState, useRef } from 'react';
+import axios from './config/axiosProxy';
 
 const Users: React.FC<{}> = () => {
   const [data, setData] = useState<string>('');
+
   const allUsers = () => {
     (async () => {
-      const res = await fetch('/users');
-      const data = await res.json();
-      setData(() => JSON.stringify(data));
+      const res = await axios.get('users');
+      setData(() => JSON.stringify(res.data));
     })();
   };
 
