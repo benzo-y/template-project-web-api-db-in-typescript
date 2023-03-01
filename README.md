@@ -1,4 +1,4 @@
-# React or Vue + express + MySQL環境構築
+# React or Vue + Express + MySQL環境の雛形
 
 ## 以下のフォルダを作成
 
@@ -10,16 +10,24 @@
   - conf
   - logs
 
-## apiサーバの構築
+## apiサーバでnpmインストール
 
 ```bash
 docker-compose run --rm --no-deps api /bin/bash
 npm install
 ```
 
-## webサーバの構築
+## webサーバでnpmインストール
 
 ```bash
 docker-compose run --rm --no-deps web /bin/bash
 npm install
 ```
+
+## docker-composeで起動
+
+`docker-compose up`
+
+## TODO
+
+- [ ] 型制約のリファクタリング
