@@ -43,6 +43,16 @@ npm install
 
 `docker-compose up`
 
+
+### テーブル作成
+
+```bash
+docker exec -it {コンテナ} /bin/bash
+npm run migrate up
+```
+
 ## TODO
 
 - [ ] 型制約のリファクタリング
+- [ ] proxyの設定
+- [ ] テーブル作成をDBコンテナに移す？
