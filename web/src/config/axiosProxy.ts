@@ -8,7 +8,7 @@ const axiosOption: AxiosRequestConfig = {
     host: process.env.REACT_APP_API_SERVER || 'http://172.28.1.10',
     port:
       typeof process.env.REACT_APP_API_PORT === 'string'
-        ? Number(process.env.API_PORT)
+        ? Number(process.env.REACT_APP_API_PORT)
         : 3000,
   },
 };
