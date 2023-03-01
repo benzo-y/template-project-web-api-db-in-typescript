@@ -13,22 +13,14 @@ const Users: React.FC<{}> = () => {
 
   const userById = () => {
     (async () => {
-      const res = await fetch(`/users/${userId.current.value}`);
-      const data = await res.json();
-      setData(() => JSON.stringify(data));
+      const res = await axios.get(`/users/${userId.current.value}`);
+      setData(() => JSON.stringify(res.data));
     })();
   };
 
   async function postData(path: string, body: any) {
-    const res = await fetch(path, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
-    const data = await res.text();
-    setData(() => data);
+    const res = await axios.post(path, body);
+    setData(() => JSON.stringify(res.data));
   }
 
   const createUser = () => {
@@ -47,11 +39,8 @@ const Users: React.FC<{}> = () => {
 
   const deleteUser = () => {
     (async () => {
-      const res = await fetch(`users/${deleteUserId.current.value}`, {
-        method: 'DELETE',
-      });
-      const data = await res.text();
-      setData(() => data);
+      const res = await axios.delete(`users/${deleteUserId.current.value}`);
+      setData(() => JSON.stringify(res.data));
     })();
   };
 
