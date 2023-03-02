@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import axios from './config/axiosProxy';
+import axios from './config/axiosInstance';
 
 const Users: React.FC<{}> = () => {
   const [data, setData] = useState<string>('');
