@@ -2,17 +2,29 @@ import React, { useState, useRef } from 'react';
 import axios from './config/axiosInstance';
 import { AxiosResponse, AxiosError } from 'axios';
 
+type User = {
+  id: number;
+  username: string;
+  email: string;
+  created_at: string;
+  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 const Users: React.FC<{}> = () => {
   const [data, setData] = useState<string>('');
+  const [users, setUsers] = useState<User[]>([]);
 
   const allUsers = () => {
     axios
       .get('users')
-      .then((res: AxiosResponse<any[]>) => {
-        setData(() => JSON.stringify(res.data));
+      .then((res: AxiosResponse<User[]>) => {
+        setUsers(() => res.data);
       })
       .catch((e: AxiosError<{ error: string }>) => {
-        setData(() => e.message);
+        console.log(e.message);
+        setUsers(() => []);
       });
   };
 
@@ -60,6 +72,14 @@ const Users: React.FC<{}> = () => {
   return (
     <div>
       <button onClick={allUsers}>Get All Users</button>
+      <div>
+        <p>All Users</p>
+        <ul>
+          {users.map((user) => (
+            <li key={user.id}>{JSON.stringify(user)}</li>
+          ))}
+        </ul>
+      </div>
       <div>
         <button onClick={userById}>Get User By ID</button>
         <input ref={userId} type="number"></input>
