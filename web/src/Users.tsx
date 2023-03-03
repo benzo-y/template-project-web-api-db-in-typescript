@@ -1,14 +1,19 @@
 import React, { useState, useRef } from 'react';
 import axios from './config/axiosInstance';
+import { AxiosResponse, AxiosError } from 'axios';
 
 const Users: React.FC<{}> = () => {
   const [data, setData] = useState<string>('');
 
   const allUsers = () => {
-    (async () => {
-      const res = await axios.get('users');
-      setData(() => JSON.stringify(res.data));
-    })();
+    axios
+      .get('users')
+      .then((res: AxiosResponse<any[]>) => {
+        setData(() => JSON.stringify(res.data));
+      })
+      .catch((e: AxiosError<{ error: string }>) => {
+        setData(() => e.message);
+      });
   };
 
   const userById = () => {
